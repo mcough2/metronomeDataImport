@@ -57,7 +57,7 @@ while t < datetime.now(timezone.utc):
     })
 
     append_event('user_login', { # COUNT()
-        "user_id": random.choice(["mattd@metronome.com", "smarx@metronome.com", "ben@metronome.com"])   
+        "user_id": random.choice(["OliveYew@metronome.com", "AidaBugg@metronome.com", "MaureenBiologist@metronome.com"])   
     })
 
     t += timedelta(hours=1)
