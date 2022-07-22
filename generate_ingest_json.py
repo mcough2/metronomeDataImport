@@ -7,9 +7,9 @@ import json
 import requests
 
 token = '<API Token>'
-MacrohardId = '<Macrohard Customer ID>'
-HamPotId = '<Ham Pot Customer ID>'
-CustomerIds = [MacrohardId, HamPotId]
+EnterpriseCustomer = 'customer_id'
+StandardCustomer = 'customer_id'
+CustomerIds = [EnterpriseCustomer, StandardCustomer]
 
 
 def ingest(events):
@@ -20,7 +20,7 @@ def ingest(events):
     print('success')
 
 def random_monthly_target(n):
-    return random.randint(90*n // 720, 110*n // 720)
+    return random.randint(n, 2*n)
 
 events = []
 for cid in CustomerIds: 
@@ -35,12 +35,12 @@ for cid in CustomerIds:
                 "customer_id": customerId,
                 "properties": properties,
             })
-        if cid == HamPotId:
+        if cid == StandardCustomer:
                 append_event('gb_logs_ingested', {
-                    "gb_ingested":random_monthly_target(130)
+                    "gb_ingested":random_monthly_target(10000)
                 })
-        if cid == MacrohardId:
-                user_id = uuid.uuid1().fields[1]
+        if cid == EnterpriseCustomer:
+                user_id = uuid.uuid1().fields[1] + random.randint(1,1005)
                 append_event('user_login', {
                     "user_id": f'"{user_id}"'
                 })
